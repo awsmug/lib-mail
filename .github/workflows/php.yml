@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
       
-    - name: run tests
+    - name: Run phpunit tests
       run: ./vendor/bin/phpunit tests
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
