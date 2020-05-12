@@ -37,7 +37,7 @@ final class MailTest extends TestCase {
 	public function testMailFromAddress(): void
 	{
 		$this->mail->set_from_email( 'john.doe@dummy.com' );
-		$this->assertEquals('john.doe@dummsssy.com', $this->mail->get_from_email() );
+		$this->assertEquals('john.doe@dummy.com', $this->mail->get_from_email() );
 
 		$this->expectException( Exception::class );
 		$this->mail->set_from_email( 'abcdefg' );
