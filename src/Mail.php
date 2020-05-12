@@ -350,9 +350,9 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function send() {
+	public function send() : bool {
 		$this->mail_driver->set_mail( $this );
-		$this->mail_driver->send();
+		return $this->mail_driver->send();
 	}
 
 	/**

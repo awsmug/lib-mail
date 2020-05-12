@@ -144,7 +144,6 @@ final class MailTest extends TestCase {
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
-		// $this->expectException( Exception::class );
-		// $this->mail->send();
+		$this->assertTrue( $this->mail->send() );
 	}
 }

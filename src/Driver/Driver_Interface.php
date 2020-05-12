@@ -28,5 +28,5 @@ interface Driver_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function send();
+	public function send() : bool;
 }

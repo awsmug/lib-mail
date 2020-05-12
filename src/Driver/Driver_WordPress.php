@@ -22,7 +22,7 @@ class Driver_WordPress extends Driver {
 	 *
 	 * @throws Exception
 	 */
-	public function send() {
+	public function send() : bool {
 		if ( ! function_exists( 'wp_mail' ) ) {
 			throw new Exception( 'wp_mail function does not exists. Make sure you working on a WordPress installation.' );
 		}
@@ -50,8 +50,6 @@ class Driver_WordPress extends Driver {
 			$headers[] = "Bcc: {$bcc}";
 		}
 
-		if ( ! wp_mail( $to, $subject, $content, $headers, $attachments ) ) {
-			throw new Exception( 'wp_mail returned false. Mail was not sent.' );
-		}
+		return wp_mail( $to, $subject, $content, $headers, $attachments );
 	}
 }

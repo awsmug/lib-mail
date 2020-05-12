@@ -22,7 +22,7 @@ class Driver_PHP extends Driver {
 	 *
 	 * @throws Exception
 	 */
-	public function send() {
+	public function send() : bool {
 		$from_name   = $this->mail->get_from_name();
 		$from_email  = $this->mail->get_from_email();
 		$to          = $this->mail->get_to_email_addresses();
@@ -85,8 +85,6 @@ class Driver_PHP extends Driver {
 
 		$headers = implode( ' \r\n', $headers );
 
-		if ( ! mail( $to, $subject, $content, $headers ) ) {
-			throw new Exception( 'PHP mail function returned false. Mail was not sent.' );
-		}
+		return mail( $to, $subject, $content, $headers );
 	}
 }
