@@ -145,6 +145,17 @@ class Mail {
 		return $this->from_name;
 	}
 
+	/**
+	 * Add to email addresses.
+	 *
+	 * @param string $email
+	 * @param int $position
+	 *
+	 * @return bool
+	 * @throws Exception
+	 *
+	 * @since 1.0.0
+	 */
 	public function add_to_email( string $email, int $position = -1 ) {
 		return $this->add_email_to_array( $email, $this->to_emails, $position );
 	}
