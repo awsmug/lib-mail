@@ -2,7 +2,7 @@
 
 namespace awsm\Mail_Wrapper\Driver;
 
-use awsm\Mail_Wrapper\Driver\Driver_Interface;
+use awsm\Mail_Wrapper\Mail;
 
 /**
  * Mailer parent class.
@@ -12,4 +12,12 @@ use awsm\Mail_Wrapper\Driver\Driver_Interface;
  * @since 1.0.0
  */
 abstract class Driver implements Driver_Interface {
+	/**
+	 * Mail object.
+	 *
+	 * @var Mail
+	 *
+	 * @since 1.0.0
+	 */
+	protected $mail;
 }
