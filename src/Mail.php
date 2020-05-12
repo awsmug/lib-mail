@@ -2,7 +2,7 @@
 
 namespace awsm\Mail_Wrapper;
 
-use awsm\Mail_Wrapper\Wrappers\Mail_Wrapper;
+use awsm\Mail_Wrapper\Driver\Driver as Mail_Driver;
 
 /**
  * Class Mail
@@ -67,34 +67,34 @@ class Mail {
 	private $attachements = array();
 
 	/**
-	 * Mail wrapper.
+	 * Mail driver.
 	 *
-	 * @var Mail_Wrapper $mail_wrapper
+	 * @var Mail_Driver $mail_driver;
 	 *
 	 * @since 1.0.0
 	 */
-	private $mail_wrapper;
+	private $mail_driver;
 
 	/**
 	 * Mail constructor.
 	 *
-	 * @param Mail_Wrapper $mail_wrapper Mail Wrapper object (PHP or WordPress).
+	 * @param Mail_Driver $mail_driver Mail driver object (PHP or WordPress).
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( Mail_Wrapper $mail_wrapper ) {
-		$this->mail_wrapper = $mail_wrapper;
+	public function __construct( Mail_Driver $mail_driver ) {
+		$this->mail_driver = $mail_driver;
 	}
 
 	/**
 	 * Get mail wrapper.
 	 *
-	 * @return Mail_Wrapper
+	 * @return Mail_Driver
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_mail_wrapper() : Mail_Wrapper {
-		return $this->mail_wrapper;
+	public function get_driver() : Mail_Driver {
+		return $this->mail_driver;
 	}
 
 	/**
@@ -172,9 +172,12 @@ class Mail {
 	 * Send Mail.
 	 *
 	 * @return bool
+	 *
+	 * @since 1.0.0
 	 */
 	public function send() : bool {
-
+		$this->mail_driver->set_mail( $this );
+		return $this->mail_driver->send();
 	}
 
 	/**

@@ -2,28 +2,29 @@
 
 use PHPUnit\Framework\TestCase;
 
-use awsm\Mail_Wrapper\Wrappers\PHP;
 use awsm\Mail_Wrapper\Mail;
+use awsm\Mail_Wrapper\Driver\Driver_PHP AS Mail_Driver_PHP;
 use awsm\Mail_Wrapper\Exception;
 
 final class MailTest extends TestCase {
-	private $wrapper_php;
+	private $driver;
 
 	private $mail;
 
 	protected function setUp(): void
 	{
-		$this->wrapper_php = new PHP();
-		$this->mail = new Mail( $this->wrapper_php );
+		$this->driver = new Mail_Driver_PHP();
+		$this->mail = new Mail( $this->driver );
 	}
 
 	public function testMailClass(): void
 	{
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Wrappers\PHP', $this->wrapper_php );
+		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_PHP', $this->driver );
 
 		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Mail', $this->mail );
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Wrappers\Mail_Wrapper', $this->mail->get_mail_wrapper() );
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Wrappers\PHP', $this->mail->get_mail_wrapper() );
+		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_Interface', $this->mail->get_driver() );
+		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver', $this->mail->get_driver() );
+		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_PHP', $this->mail->get_driver() );
 
 	}
 
