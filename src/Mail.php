@@ -120,14 +120,18 @@ class Mail {
 	 *
 	 * @param string $email Email address.
 	 *
+	 * @return Mail Mail object.
+	 *
 	 * @since 1.0.0
 	 */
-	public function set_from_email( string $email ) {
+	public function set_from_email( string $email ) : Mail {
 		if( ! $this->validate_email( $email ) ) {
 			throw new Exception ( 'Invalid email-address.', 1 );
 		}
 
 		$this->from_email = $email;
+
+		return $this;
 	}
 
 	/**
@@ -146,10 +150,14 @@ class Mail {
 	 *
 	 * @param string $name From name.
 	 *
+	 * @return Mail Mail object.
+	 *
 	 * @since 1.0.0
 	 */
-	public function set_from_name( string $name ) {
+	public function set_from_name( string $name ) : Mail {
 		$this->from_name = $name;
+
+		return $this;
 	}
 
 	/**
@@ -168,12 +176,17 @@ class Mail {
 	 *
 	 * @param string $email    Email address to add.
 	 * @param int    $position
+	 *
+	 * @return Mail Mail object.
+	 *
 	 * @throws Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_to_email( string $email, int $position = -1 ) {
+	public function add_to_email( string $email, int $position = -1 ) : Mail {
 		$this->add_email_to_array( $email, $this->to_emails, $position );
+
+		return $this;
 	}
 
 	/**
@@ -192,12 +205,17 @@ class Mail {
 	 *
 	 * @param string $email    Email address to add.
 	 * @param int    $position Position in array.
+	 *
+	 * @return Mail Mail object.
+	 *
 	 * @throws Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_cc_email( string $email, int $position = -1 ) {
+	public function add_cc_email( string $email, int $position = -1 ) : Mail {
 		$this->add_email_to_array( $email, $this->cc_emails, $position );
+
+		return $this;
 	}
 
 	/**
@@ -216,12 +234,17 @@ class Mail {
 	 *
 	 * @param string $email    Email address to add.
 	 * @param int    $position Position in array.
+	 *
+	 * @return Mail Mail object.
+	 *
 	 * @throws Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_bcc_email( string $email, int $position = -1 ) {
+	public function add_bcc_email( string $email, int $position = -1 ) : Mail {
 		$this->add_email_to_array( $email, $this->bcc_emails, $position );
+
+		return $this;
 	}
 
 	/**
@@ -276,10 +299,14 @@ class Mail {
 	 *
 	 * @param string $subject
 	 *
+	 * @return Mail Mail object.
+	 *
 	 * @since 1.0.0
 	 */
-	public function set_subject( string $subject ) : void {
+	public function set_subject( string $subject ) : Mail {
 		$this->subject = $subject;
+
+		return $this;
 	}
 
 	/**
@@ -298,10 +325,14 @@ class Mail {
 	 *
 	 * @param string $content
 	 *
+	 * @return Mail Mail object.
+	 *
 	 * @since 1.0.0
 	 */
-	public function set_content( string $content ) : void {
+	public function set_content( string $content ) : Mail {
 		$this->content = $content;
+
+		return $this;
 	}
 
 	/**
@@ -320,16 +351,20 @@ class Mail {
 	 *
 	 * @param string $attachment Attachment file (path not url!).
 	 *
+	 * @return Mail Mail object.
+	 *
 	 * @throws Exception Invalid email address.
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_attachment ( string $attachment ) : void {
+	public function add_attachment ( string $attachment ) : Mail {
 		if( ! $this->validate_attachment( $attachment ) ) {
 			throw new Exception ( 'Invalid attachment file.', 1 );
 		}
 
 		$this->add_to_array( $attachment, $this->attachements );
+
+		return $this;
 	}
 
 	/**
