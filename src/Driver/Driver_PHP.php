@@ -25,9 +25,9 @@ class Driver_PHP extends Driver {
 	public function send() : bool {
 		$from_name   = $this->mail->get_from_name();
 		$from_email  = $this->mail->get_from_email();
-		$to          = $this->mail->get_to_email_addresses();
-		$cc          = $this->mail->get_cc_email_addresses();
-		$bcc         = $this->mail->get_bcc_email_addresses();
+		$to          = $this->mail->get_to_emails();
+		$cc          = $this->mail->get_cc_emails();
+		$bcc         = $this->mail->get_bcc_emails();
 		$subject     = $this->mail->get_subject();
 		$content     = $this->mail->get_content();
 		$attachments = $this->mail->get_attachments();
@@ -56,7 +56,6 @@ class Driver_PHP extends Driver {
 
 			$mime_boundary = "==Multipart_Boundary_x{$uid}x";
 
-			//  $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";
 			// Headers for attachment
 			$headers[] = 'MIME-Version: 1.0';
 			$headers[] = 'Content-Type: multipart/mixed;';

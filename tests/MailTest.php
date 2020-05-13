@@ -43,60 +43,60 @@ final class MailTest extends TestCase {
 	}
 
 	public function testMailToAddress(): void {
-		$this->mail->add_to_email_address('john.doe1@dummy.com' );
-		$this->mail->add_to_email_address('john.doe2@dummy.com' );
-		$this->mail->add_to_email_address('john.doe3@dummy.com' );
+		$this->mail->add_to_email('john.doe1@dummy.com' );
+		$this->mail->add_to_email('john.doe2@dummy.com' );
+		$this->mail->add_to_email('john.doe3@dummy.com' );
 
-		$email_addresses = $this->mail->get_to_email_addresses();
+		$emails = $this->mail->get_to_emails();
 
-		$this->assertIsArray( $email_addresses );
-		$this->assertEquals('john.doe1@dummy.com', $email_addresses[0] );
+		$this->assertIsArray( $emails );
+		$this->assertEquals('john.doe1@dummy.com', $emails[0] );
 
-		$this->mail->add_to_email_address('john.doe4@dummy.com', 0 );
+		$this->mail->add_to_email('john.doe4@dummy.com', 0 );
 
-		$email_addresses = $this->mail->get_to_email_addresses();
-		$this->assertEquals('john.doe4@dummy.com', $email_addresses[0] );
+		$emails = $this->mail->get_to_emails();
+		$this->assertEquals('john.doe4@dummy.com', $emails[0] );
 
 		$this->expectException( Exception::class );
-		$this->mail->add_to_email_address( 'abcdefg' );
+		$this->mail->add_to_email( 'abcdefg' );
 	}
 
 	public function testMailCCAddress(): void {
-		$this->mail->add_cc_email_address('john.doe5@dummy.com' );
-		$this->mail->add_cc_email_address('john.doe6@dummy.com' );
-		$this->mail->add_cc_email_address('john.doe7@dummy.com' );
+		$this->mail->add_cc_email('john.doe5@dummy.com' );
+		$this->mail->add_cc_email('john.doe6@dummy.com' );
+		$this->mail->add_cc_email('john.doe7@dummy.com' );
 
-		$email_addresses = $this->mail->get_cc_email_addresses();
+		$emails = $this->mail->get_cc_emails();
 
-		$this->assertIsArray( $email_addresses );
-		$this->assertEquals('john.doe5@dummy.com', $email_addresses[0] );
+		$this->assertIsArray( $emails );
+		$this->assertEquals('john.doe5@dummy.com', $emails[0] );
 
-		$this->mail->add_cc_email_address('john.doe8@dummy.com', 0 );
+		$this->mail->add_cc_email('john.doe8@dummy.com', 0 );
 
-		$email_addresses = $this->mail->get_cc_email_addresses();
-		$this->assertEquals('john.doe8@dummy.com', $email_addresses[0] );
+		$emails = $this->mail->get_cc_emails();
+		$this->assertEquals('john.doe8@dummy.com', $emails[0] );
 
 		$this->expectException( Exception::class );
-		$this->mail->add_cc_email_address( 'abcdefg' );
+		$this->mail->add_cc_email( 'abcdefg' );
 	}
 
 	public function testMailBCCAddress(): void {
-		$this->mail->add_bcc_email_address('john.doe9@dummy.com' );
-		$this->mail->add_bcc_email_address('john.doe10@dummy.com' );
-		$this->mail->add_bcc_email_address('john.doe11@dummy.com' );
+		$this->mail->add_bcc_email('john.doe9@dummy.com' );
+		$this->mail->add_bcc_email('john.doe10@dummy.com' );
+		$this->mail->add_bcc_email('john.doe11@dummy.com' );
 
-		$email_addresses = $this->mail->get_bcc_email_addresses();
+		$emails = $this->mail->get_bcc_emails();
 
-		$this->assertIsArray( $email_addresses );
-		$this->assertEquals('john.doe9@dummy.com', $email_addresses[0] );
+		$this->assertIsArray( $emails );
+		$this->assertEquals('john.doe9@dummy.com', $emails[0] );
 
-		$this->mail->add_bcc_email_address('john.doe12@dummy.com', 0 );
+		$this->mail->add_bcc_email('john.doe12@dummy.com', 0 );
 
-		$email_addresses = $this->mail->get_bcc_email_addresses();
-		$this->assertEquals('john.doe12@dummy.com', $email_addresses[0] );
+		$emails = $this->mail->get_bcc_emails();
+		$this->assertEquals('john.doe12@dummy.com', $emails[0] );
 
 		$this->expectException( Exception::class );
-		$this->mail->add_bcc_email_address( 'abcdefg' );
+		$this->mail->add_bcc_email( 'abcdefg' );
 	}
 
 	public function testMailSubject(): void
@@ -140,10 +140,10 @@ final class MailTest extends TestCase {
 	public function testSendEmail(): void {
 		$this->mail->set_from_name( 'John Doe' );
 		$this->mail->set_from_email( 'john.doe@dummy.com' );
-		$this->mail->add_to_email_address('john.doe2@dummy.com' );
+		$this->mail->add_to_email('sven@awesome.ug' );
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
-		$this->assertTrue( $this->mail->send() );
+		$this->assertFalse( $this->mail->send() );
 	}
 }

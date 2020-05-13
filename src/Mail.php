@@ -172,7 +172,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_to_email_address( string $email, int $position = -1 ) {
+	public function add_to_email( string $email, int $position = -1 ) {
 		$this->add_email_to_array( $email, $this->to_emails, $position );
 	}
 
@@ -183,7 +183,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_to_email_addresses() : array {
+	public function get_to_emails() : array {
 		return $this->to_emails;
 	}
 
@@ -196,7 +196,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_cc_email_address( string $email, int $position = -1 ) {
+	public function add_cc_email( string $email, int $position = -1 ) {
 		$this->add_email_to_array( $email, $this->cc_emails, $position );
 	}
 
@@ -207,7 +207,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_cc_email_addresses() : array {
+	public function get_cc_emails() : array {
 		return $this->cc_emails;
 	}
 
@@ -220,7 +220,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_bcc_email_address( string $email, int $position = -1 ) {
+	public function add_bcc_email( string $email, int $position = -1 ) {
 		$this->add_email_to_array( $email, $this->bcc_emails, $position );
 	}
 
@@ -231,7 +231,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_bcc_email_addresses() : array {
+	public function get_bcc_emails() : array {
 		return $this->bcc_emails;
 	}
 

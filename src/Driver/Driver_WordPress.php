@@ -29,9 +29,9 @@ class Driver_WordPress extends Driver {
 
 		$from_name   = $this->mail->get_from_name();
 		$from_email  = $this->mail->get_from_email();
-		$to          = $this->mail->get_to_email_addresses();
-		$cc          = $this->mail->get_cc_email_addresses();
-		$bcc         = $this->mail->get_bcc_email_addresses();
+		$to          = $this->mail->get_to_emails();
+		$cc          = $this->mail->get_cc_emails();
+		$bcc         = $this->mail->get_bcc_emails();
 		$subject     = $this->mail->get_subject();
 		$content     = $this->mail->get_content();
 		$attachments = $this->mail->get_attachments();
