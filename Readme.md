@@ -12,6 +12,8 @@ In this case, the drivers used for this are responsible for correct sending.
 First the appropriate driver must be selected and initialized.
 
 ```php
+<?php
+
 use awsm\Mail_Wrapper\Driver\Driver_PHP;
 
 $driver = new Driver_PHP();
@@ -20,6 +22,8 @@ $driver = new Driver_PHP();
 Next, the driver must be passed to the mail class.
 
 ```php
+<?php
+
 use awsm\Mail_Wrapper\Driver\Driver_PHP;
 use awsm\Mail_Wrapper\Mail;
 
@@ -30,6 +34,8 @@ $mail = new Mail( $driver );
 Then the functions from the mail class can be used.
 
 ```php
+<?php
+
 use awsm\Mail_Wrapper\Driver\Driver_PHP;
 use awsm\Mail_Wrapper\Mail;
 
