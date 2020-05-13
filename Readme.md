@@ -2,7 +2,7 @@
 
 ![](https://github.com/awsmug/mail-wrapper/workflows/PHPUnit/badge.svg)
 
-Version 1.0.0
+Version 1.0.0-beta-1
 
 The mail wrapper allows the sending of mails, independent of the used system. 
 In this case, the drivers used for this are responsible for correct sending.

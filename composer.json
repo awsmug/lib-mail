@@ -1,7 +1,7 @@
 {
     "name": "awsm/mail_wrapper",
     "description": "PHP Mail wrapper for use in different environments.",
-    "version": "1.0.0",
+    "version": "1.0.0-beta-1",
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
