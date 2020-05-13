@@ -5,7 +5,7 @@
 Version 1.0.0-beta-1
 
 The mail wrapper allows the sending of mails, independent of the used system. 
-In this case, the drivers used for this are responsible for correct sending.
+In this case, the drivers used for this are responsible for sending with the correct mailing functions.
 
 ## Use of the mail wrapper
 
