@@ -31,7 +31,7 @@ $driver = new Driver_PHP();
 $mail = new Mail( $driver );
 ```
 
-Then the functions from the mail class can be used.
+Then the functions from the mail class can be used. Also function chaining is allowed.
 
 ```php
 <?php
@@ -43,16 +43,12 @@ use awsm\Mail_Wrapper\Mail;
 $driver = new Driver_PHP();
 $mail = new Mail( $driver );
 
-$mail->add_to_email( 'john.doe@dummy.com' );
-$mail->set_from_name( 'Developer' );
-$mail->set_from_email( 'developer@dummy.com' );
-
-$mail->set_subject( 'Read my mail!' );
-$mail->set_content( 'Hello John! Greetings from the developer!' );
-
-if ( $mail->send() ) {
-    echo "Email sent successfully!";
-}
+$mail->add_to_email( 'john.doe@dummy.com' )
+     ->set_from_name( 'Developer' )
+     ->set_from_email( 'developer@dummy.com' )
+     ->set_subject( 'Read my mail!' )
+     ->set_content( 'Hello John! Greetings from the developer!' )
+     ->send();
 ```
 
 ## Drivers

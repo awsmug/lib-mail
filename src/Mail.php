@@ -381,13 +381,18 @@ class Mail {
 	/**
 	 * Send Mail.
 	 *
-	 * @return bool True if sent, false if not.
+	 * @return Mail Mail object.
 	 *
 	 * @since 1.0.0
 	 */
-	public function send() : bool {
+	public function send() : Mail {
 		$this->mail_driver->set_mail( $this );
-		return $this->mail_driver->send();
+
+		if( ! $this->mail_driver->send() ) {
+			throw new Exception( 'Email delivery failed', 02 );
+		}
+
+		return $this;
 	}
 
 	/**
