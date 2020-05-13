@@ -31,24 +31,29 @@ $driver = new Driver_PHP();
 $mail = new Mail( $driver );
 ```
 
-Then the functions from the mail class can be used. Also function chaining is allowed.
+Then the functions from the mail class can be used.
 
 ```php
 <?php
 
 use awsm\Mail_Wrapper\Driver\Driver_PHP;
 use awsm\Mail_Wrapper\Mail;
+use awsm\Mail_Wrapper\Exception;
 
 
 $driver = new Driver_PHP();
 $mail = new Mail( $driver );
 
-$mail->add_to_email( 'john.doe@dummy.com' )
-     ->set_from_name( 'Developer' )
-     ->set_from_email( 'developer@dummy.com' )
-     ->set_subject( 'Read my mail!' )
-     ->set_content( 'Hello John! Greetings from the developer!' )
-     ->send();
+try {
+    $mail->add_to_email( 'john.doe@dummy.com' )
+         ->set_from_name( 'Developer' )
+         ->set_from_email( 'developer@dummy.com' )
+         ->set_subject( 'Read my mail!' )
+         ->set_content( 'Hello John! Greetings from the developer!' )
+         ->send();
+} catch ( Exception $e ) {
+    echo $e->getMessage();
+}
 ```
 
 ## Drivers
