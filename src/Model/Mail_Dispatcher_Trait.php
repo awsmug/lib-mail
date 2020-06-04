@@ -1,6 +1,6 @@
 <?php
 
-namespace awsm\Mail_Wrapper\Model;
+namespace AWSM\Lib_Mail\Model;
 
 trait Mail_Dispatcher_Trait {
 	/**

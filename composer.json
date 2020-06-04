@@ -1,11 +1,11 @@
 {
-    "name": "awsm/mail-wrapper",
-    "description": "PHP Mail wrapper for use in different environments.",
+    "name": "awsm/lib-mail",
+    "description": "Awesome Mail functionality.",
     "version": "1.0.0-beta-1",
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "awsm\\Mail_Wrapper\\" : "src/"
+            "AWSM\\Lib_Mail\\" : "src/"
         }
     },
     "require-dev": {

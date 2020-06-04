@@ -1,11 +1,11 @@
 <?php
 
-namespace awsm\Mail_Wrapper;
+namespace AWSM\Lib_Mail;
 
 /**
  * Class Mail_Exception.
  *
- * @package awsm\Mail_Wrapper
+ * @package AWSM\Lib_Mail
  *
  * @since 1.0.0
  */

@@ -14,7 +14,7 @@ First create an email object and add data for email.
 ```php
 <?php
 
-use awsm\Mail_Wrapper\Mail;
+use AWSM\Lib_Mail\Mail;
 
 $mail = new Mail();
 ```
@@ -24,9 +24,9 @@ Then the functions from the mail class can be used.
 ```php
 <?php
 
-use awsm\Mail_Wrapper\Dispatcher\PHP_Mail;
-use awsm\Mail_Wrapper\Mail;
-use awsm\Mail_Wrapper\Mail_Exception;
+use AWSM\Lib_Mail\Dispatcher\PHP_Mail;
+use AWSM\Lib_Mail\Mail;
+use AWSM\Lib_Mail\Mail_Exception;
 
 
 $mail = new Mail();

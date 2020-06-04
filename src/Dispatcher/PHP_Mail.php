@@ -1,15 +1,15 @@
 <?php
 
-namespace awsm\Mail_Wrapper\Dispatcher;
+namespace AWSM\Lib_Mail\Dispatcher;
 
-use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Trait;
-use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Interface;
-use awsm\Mail_Wrapper\Mail_Exception;
+use AWSM\Lib_Mail\Model\Mail_Dispatcher_Trait;
+use AWSM\Lib_Mail\Model\Mail_Dispatcher_Interface;
+use AWSM\Lib_Mail\Mail_Exception;
 
 /**
  * Class PHP_Mail.
  *
- * @package awsm\Mail_Wrapper\Dispatcher
+ * @package AWSM\Lib_Mail\Dispatcher
  *
  * @since 1.0.0
  */

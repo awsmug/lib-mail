@@ -1,13 +1,13 @@
 <?php
 
-namespace awsm\Mail_Wrapper;
+namespace AWSM\Lib_Mail;
 
-use awsm\Mail_Wrapper\Model\Mail_Interface;
+use AWSM\Lib_Mail\Model\Mail_Interface;
 
 /**
  * Trait Mail_Header_Trait.
  *
- * @package awsm\Mail_Wrapper
+ * @package AWSM\Lib_Mail
  *
  * @since 1.0.0
  */

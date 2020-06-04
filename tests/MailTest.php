@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
-use awsm\Mail_Wrapper\Mail;
-use awsm\Mail_Wrapper\Dispatcher\PHP_Mail;
-use awsm\Mail_Wrapper\Mail_Exception;
+use AWSM\Lib_Mail\Mail;
+use AWSM\Lib_Mail\Dispatcher\PHP_Mail;
+use AWSM\Lib_Mail\Mail_Exception;
 
 final class MailTest extends TestCase {
 	private $dispatcher;

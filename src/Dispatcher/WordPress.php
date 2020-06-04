@@ -1,15 +1,15 @@
 <?php
 
-namespace awsm\Mail_Wrapper\Driver;
+namespace AWSM\Lib_Mail\Driver;
 
-use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Trait;
-use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Interface;
-use awsm\Mail_Wrapper\Mail_Exception;
+use AWSM\Lib_Mail\Model\Mail_Dispatcher_Trait;
+use AWSM\Lib_Mail\Model\Mail_Dispatcher_Interface;
+use AWSM\Lib_Mail\Mail_Exception;
 
 /**
  * Class WordPress.
  *
- * @package awsm\Mail_Wrapper\Driver
+ * @package AWSM\Lib_Mail\Driver
  *
  * @since 1.0.0
  */

@@ -1,11 +1,11 @@
 <?php
 
-namespace awsm\Mail_Wrapper\Model;
+namespace AWSM\Lib_Mail\Model;
 
 /**
  * Interface Mail_Dispatcher_Interface
  *
- * @package awsm\Mail_Wrapper
+ * @package AWSM\Lib_Mail
  *
  * @since 1.0.0
  */
