@@ -2,8 +2,8 @@
 
 namespace awsm\Mail_Wrapper\Driver;
 
-use awsm\Mail_Wrapper\Mail_Dispatcher_Interface;
-use awsm\Mail_Wrapper\Mail_Dispatcher_Trait;
+use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Trait;
+use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Interface;
 use awsm\Mail_Wrapper\Mail_Exception;
 
 /**

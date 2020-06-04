@@ -2,9 +2,9 @@
 
 namespace awsm\Mail_Wrapper\Dispatcher;
 
-use awsm\Mail_Wrapper\Mail_Dispatcher_Trait;
+use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Trait;
+use awsm\Mail_Wrapper\Model\Mail_Dispatcher_Interface;
 use awsm\Mail_Wrapper\Mail_Exception;
-use awsm\Mail_Wrapper\Mail_Dispatcher_Interface;
 
 /**
  * Class PHP_Mail.

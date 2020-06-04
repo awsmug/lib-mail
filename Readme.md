@@ -40,7 +40,7 @@ try {
     $mail->set_content( 'Hello John! Greetings from the developer!' );
 
     $dispatcher->set_mail( $mail );
-    $dispatcher->send();       
+    $dispatcher->send();
 } catch ( Mail_Exception $e ) {
     echo $e->getMessage();
 }
