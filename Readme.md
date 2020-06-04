@@ -1,10 +1,12 @@
 # Awesome Lib Mail
 
+Easy and clean mail creation and transportation.
+
 ![](https://github.com/awsmug/lib-mail/workflows/PHPUnit/badge.svg)
 
 Version 1.0.0-beta-1
 
-The mail wrapper allows the sending of mails, with its interfaces i
+This little library allows you to create email objects easy sent by a selected transporter (PHP mail function, WordPress, etc.).
 
 ## Example
 
