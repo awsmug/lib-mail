@@ -132,7 +132,7 @@ final class MailTest extends TestCase {
 	public function testSendEmail(): void {
 		$this->mail->set_from_name( 'John Doe' );
 		$this->mail->set_from_email( 'john.doe@dummy.com' );
-		$this->mail->add_to_email('sven@awesome.ug' );
+		$this->mail->add_to_email('trash@awesome.ug' );
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
