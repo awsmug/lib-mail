@@ -106,9 +106,9 @@ class Mail implements Mail_Interface {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->uid = md5( uniqid( time() ) );
+		$this->uid           = md5( uniqid( time() ) );
 		$this->mime_boundary = "==Multipart_Boundary_x{$this->uid}x";
-    }
+	}
 
 	/**
 	 * Set from email.
@@ -170,7 +170,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_to_email( string $email, int $position = - 1 ) : void {
+	public function add_to_email( string $email, int $position = - 1 ): void {
 		$this->add_email_to_array( $email, $this->to_emails, $position );
 	}
 
@@ -197,7 +197,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_cc_email( string $email, int $position = - 1 ) : void {
+	public function add_cc_email( string $email, int $position = - 1 ): void {
 		$this->add_email_to_array( $email, $this->cc_emails, $position );
 	}
 
@@ -222,7 +222,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_bcc_email( string $email, int $position = - 1 ) : void {
+	public function add_bcc_email( string $email, int $position = - 1 ): void {
 		$this->add_email_to_array( $email, $this->bcc_emails, $position );
 	}
 
@@ -244,7 +244,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_subject( string $subject ) : void {
+	public function set_subject( string $subject ): void {
 		$this->subject = $subject;
 	}
 
@@ -255,7 +255,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_subject() : string {
+	public function get_subject(): string {
 		return $this->subject;
 	}
 
@@ -266,8 +266,19 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_content( string $content ) : void {
+	public function set_content( string $content ): void {
 		$this->content = $content;
+	}
+
+	/**
+	 * Get mail content.
+	 *
+	 * @return string Mail content.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_content(): string {
+		return $this->content;
 	}
 
 	/**
@@ -277,29 +288,29 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_body() : string {
+	public function get_body(): string {
 		$body = "--{$this->mime_boundary}\r\n";
 		$body .= "Content-Type: {$this->get_content_type()}; charset=ISO-8859-1\r\n";
 		$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		$body .= chunk_split(base64_encode($this->content));
+		$body .= chunk_split( base64_encode( $this->content ) );
 
 		if ( count( $this->attachments ) > 0 ) {
 			foreach ( $this->attachments as $attachment ) {
 				$file_name = basename( $attachment );
 				$file_size = filesize( $attachment );
 
-				$body   .= "--{$this->mime_boundary}\n";
-				$fp      = fopen( $attachment, 'rb' );
-				$data    = fread( $fp, $file_size );
+				$body .= "--{$this->mime_boundary}\n";
+				$fp   = fopen( $attachment, 'rb' );
+				$data = fread( $fp, $file_size );
 
 				fclose( $fp );
 
 				$data = chunk_split( base64_encode( $data ) );
 
 				$body .= "Content-Type: application/octet-stream; name=\"" . $file_name . "\"\n" .
-				            "Content-Description: " . $file_name . "\n" .
-				            "Content-Disposition: attachment;\n" . " filename=\"" . $file_name . "\"; size=" . $file_size . ";\n" .
-				            "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
+				         "Content-Description: " . $file_name . "\n" .
+				         "Content-Disposition: attachment;\n" . " filename=\"" . $file_name . "\"; size=" . $file_size . ";\n" .
+				         "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
 			}
 
 			$body .= "--{$this->mime_boundary}--";
@@ -316,31 +327,27 @@ class Mail implements Mail_Interface {
 	 * @since 1.0.0
 	 */
 	public function get_header(): string {
-		$from_name   = $this->get_from_name();
-		$from_email  = $this->get_from_email();
-		$to          = $this->get_to_emails();
-		$cc          = $this->get_cc_emails();
-		$bcc         = $this->get_bcc_emails();
-
 		$headers = array();
 
 		if ( ! empty( $this->from_name ) && ! empty( $this->from_email ) ) {
-			$headers[] = "From: {$from_name} <{$from_email}>";
+			$headers[] = "From: {$this->from_name} <{$this->from_email}>";
+		} elseif ( ! empty( $this->from_email ) ) {
+			$headers[] = "From: {$this->from_email}";
 		}
 
-		if ( count( $to ) > 0 ) {
-			$to        = implode( ', ', $to );
-			$headers[] = "Cc: {$to}";
+		if ( count( $this->to_emails ) > 0 ) {
+			$this->to_emails = implode( ', ', $this->to_emails );
+			$headers[]       = "To: {$this->to_emails}";
 		}
 
-		if ( count( $cc ) > 0 ) {
-			$cc        = implode( ', ', $cc );
-			$headers[] = "Cc: {$cc}";
+		if ( count( $this->cc_emails ) > 0 ) {
+			$this->cc_emails = implode( ', ', $this->cc_emails );
+			$headers[]       = "Cc: {$this->cc_emails}";
 		}
 
-		if ( count( $bcc ) > 0 ) {
-			$bcc       = implode( ', ', $bcc );
-			$headers[] = "Bcc: {$bcc}";
+		if ( count( $this->bcc_emails ) > 0 ) {
+			$bcc       = implode( ', ', $this->bcc_emails );
+			$headers[] = "Bcc: {$this->bcc_emails}";
 		}
 
 		if ( count( $this->attachments ) > 0 ) {
@@ -394,7 +401,7 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_content_type( string $content_type ) : void {
+	public function set_content_type( string $content_type ): void {
 		$this->content_type = $content_type;
 	}
 
@@ -405,12 +412,12 @@ class Mail implements Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_content_type() : string {
+	public function get_content_type(): string {
 		if ( ! empty( $this->content_type ) ) {
 			return $this->content_type;
 		}
 
-		if ( $this->content !== strip_tags( $this->content  ) ) {
+		if ( $this->content !== strip_tags( $this->content ) ) {
 			return $this->content_type = 'text/html';
 		} else {
 			return $this->content_type = 'text/plain';

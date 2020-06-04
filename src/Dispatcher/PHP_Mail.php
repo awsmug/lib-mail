@@ -26,9 +26,9 @@ class PHP_Mail implements Mail_Dispatcher_Interface {
 	 * @since 1.0.0
 	 */
 	public function send() : bool {
-		$to = implode( ',', $this->mail->get_to_emails() );
+		$to_emails = implode( ',', $this->mail->get_to_emails() );
 
-		if( mail( $to, $this->mail->get_subject(), $this->mail->get_body(), $this->mail->get_header() ) ) {
+		if( mail( $to_emails, $this->mail->get_subject(), $this->mail->get_body(), $this->mail->get_header() ) ) {
 			return true;
 		}
 

@@ -3,28 +3,18 @@
 use PHPUnit\Framework\TestCase;
 
 use awsm\Mail_Wrapper\Mail;
-use awsm\Mail_Wrapper\Driver\Driver_PHP AS Mail_Driver_PHP;
+use awsm\Mail_Wrapper\Dispatcher\PHP_Mail;
 use awsm\Mail_Wrapper\Mail_Exception;
 
 final class MailTest extends TestCase {
-	private $driver;
+	private $dispatcher;
 
 	private $mail;
 
 	protected function setUp(): void
 	{
-		$this->driver = new Mail_Driver_PHP();
-		$this->mail = new Mail( $this->driver );
-	}
-
-	public function testMailClass(): void
-	{
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_PHP', $this->driver );
-
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Mail', $this->mail );
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_Interface', $this->mail->get_driver() );
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver', $this->mail->get_driver() );
-		$this->assertInstanceOf( 'awsm\Mail_Wrapper\Driver\Driver_PHP', $this->mail->get_driver() );
+		$this->dispatcher = new PHP_Mail();
+		$this->mail = new Mail();
 	}
 
 	public function testMailFromName(): void
@@ -144,7 +134,8 @@ final class MailTest extends TestCase {
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
-		$this->expectException( Mail_Exception::class );
-		$this->mail->send();
+		$this->dispatcher->set_mail( $this->mail );
+
+		$this->assertFalse( $this->dispatcher->send() );
 	}
 }
