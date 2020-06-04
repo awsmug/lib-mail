@@ -3,7 +3,7 @@
 namespace awsm\Mail_Wrapper;
 
 /**
- * Class Exception.
+ * Class Mail_Exception.
  *
  * @package awsm\Mail_Wrapper
  *

@@ -41,6 +41,8 @@ final class MailTest extends TestCase {
 
 		$this->assertIsArray( $emails );
 		$this->assertEquals('john.doe1@dummy.com', $emails[0] );
+		$this->assertEquals('john.doe2@dummy.com', $emails[1] );
+		$this->assertEquals('john.doe3@dummy.com', $emails[2] );
 
 		$this->mail->add_to_email('john.doe4@dummy.com', 0 );
 

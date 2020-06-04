@@ -9,26 +9,14 @@ In this case, the drivers used for this are responsible for sending with the cor
 
 ## Use of the mail wrapper
 
-First the appropriate driver must be selected and initialized.
+First create an email object and add data for email.
 
 ```php
 <?php
 
-use awsm\Mail_Wrapper\Driver\Driver_PHP;
-
-$driver = new Driver_PHP();
-```
-
-Next, the driver must be passed to the mail class.
-
-```php
-<?php
-
-use awsm\Mail_Wrapper\Driver\Driver_PHP;
 use awsm\Mail_Wrapper\Mail;
 
-$driver = new Driver_PHP();
-$mail = new Mail( $driver );
+$mail = new Mail();
 ```
 
 Then the functions from the mail class can be used.
@@ -36,29 +24,24 @@ Then the functions from the mail class can be used.
 ```php
 <?php
 
-use awsm\Mail_Wrapper\Driver\Driver_PHP;
+use awsm\Mail_Wrapper\Dispatcher\PHP_Mail;
 use awsm\Mail_Wrapper\Mail;
 use awsm\Mail_Wrapper\Mail_Exception;
 
 
-$driver = new Driver_PHP();
-$mail = new Mail( $driver );
+$mail = new Mail();
+$dispatcher = new PHP_Mail();
 
 try {
-    $mail->add_to_email( 'john.doe@dummy.com' )
-         ->set_from_name( 'Developer' )
-         ->set_from_email( 'developer@dummy.com' )
-         ->set_subject( 'Read my mail!' )
-         ->set_content( 'Hello John! Greetings from the developer!' )
-         ->send();
+    $mail->add_to_email( 'john.doe@dummy.com' );
+    $mail->set_from_name( 'Developer' );
+    $mail->set_from_email( 'developer@dummy.com' );
+    $mail->set_subject( 'Read my mail!' );
+    $mail->set_content( 'Hello John! Greetings from the developer!' );
+
+    $dispatcher->set_mail( $mail );
+    $dispatcher->send();       
 } catch ( Mail_Exception $e ) {
     echo $e->getMessage();
 }
 ```
-
-## Drivers
-
-The following drivers are currently included in the mail wrapper.
-
-- Driver_PHP
-- Driver_WordPress

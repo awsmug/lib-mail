@@ -2,6 +2,8 @@
 
 namespace awsm\Mail_Wrapper;
 
+use awsm\Mail_Wrapper\Model\Mail_Interface;
+
 /**
  * Trait Mail_Header_Trait.
  *
