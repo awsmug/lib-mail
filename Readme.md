@@ -1,4 +1,4 @@
-# Awesome Mail-Wrapper
+# Awesome Lib Mail
 
 ![](https://github.com/awsmug/mail-wrapper/workflows/PHPUnit/badge.svg)
 
