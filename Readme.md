@@ -38,7 +38,7 @@ Then the functions from the mail class can be used.
 
 use awsm\Mail_Wrapper\Driver\Driver_PHP;
 use awsm\Mail_Wrapper\Mail;
-use awsm\Mail_Wrapper\Exception;
+use awsm\Mail_Wrapper\Mail_Exception;
 
 
 $driver = new Driver_PHP();
@@ -51,7 +51,7 @@ try {
          ->set_subject( 'Read my mail!' )
          ->set_content( 'Hello John! Greetings from the developer!' )
          ->send();
-} catch ( Exception $e ) {
+} catch ( Mail_Exception $e ) {
     echo $e->getMessage();
 }
 ```

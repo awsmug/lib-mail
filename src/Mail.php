@@ -2,16 +2,32 @@
 
 namespace awsm\Mail_Wrapper;
 
-use awsm\Mail_Wrapper\Driver\Driver as Mail_Driver;
-
 /**
- * Class Mail
+ * Trait Mail_Header_Trait.
  *
  * @package awsm\Mail_Wrapper
  *
  * @since 1.0.0
  */
-class Mail {
+class Mail implements Mail_Interface {
+	/**
+	 * UID.
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	private $uid;
+
+	/**
+	 * Mime boundary.
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.0
+	 */
+	private $mime_boundary;
+
 	/**
 	 * From email.
 	 *
@@ -60,7 +76,7 @@ class Mail {
 	/**
 	 * Subject of mail.
 	 *
-	 * @var string $subject
+	 * @var string $subject Mail subject.
 	 *
 	 * @since 1.0.0
 	 */
@@ -69,7 +85,7 @@ class Mail {
 	/**
 	 * Content of mail.
 	 *
-	 * @var string $content
+	 * @var string $content Mail content.
 	 *
 	 * @since 1.0.0
 	 */
@@ -78,60 +94,35 @@ class Mail {
 	/**
 	 * Email attachments.
 	 *
-	 * @var array $attachements
+	 * @var array $attachments
 	 *
 	 * @since 1.0.0
 	 */
-	private $attachements = array();
-
-	/**
-	 * Mail driver.
-	 *
-	 * @var Mail_Driver $mail_driver;
-	 *
-	 * @since 1.0.0
-	 */
-	private $mail_driver;
+	private $attachments = array();
 
 	/**
 	 * Mail constructor.
 	 *
-	 * @param Mail_Driver $mail_driver Mail driver object (PHP or WordPress).
-	 *
 	 * @since 1.0.0
 	 */
-	public function __construct( Mail_Driver $mail_driver ) {
-		$this->mail_driver = $mail_driver;
-	}
-
-	/**
-	 * Get mail wrapper.
-	 *
-	 * @return Mail_Driver
-	 *
-	 * @since 1.0.0
-	 */
-	public function get_driver() : Mail_Driver {
-		return $this->mail_driver;
-	}
+	public function __construct() {
+		$this->uid = md5( uniqid( time() ) );
+		$this->mime_boundary = "==Multipart_Boundary_x{$this->uid}x";
+    }
 
 	/**
 	 * Set from email.
 	 *
 	 * @param string $email Email address.
 	 *
-	 * @return Mail Mail object.
-	 *
 	 * @since 1.0.0
 	 */
-	public function set_from_email( string $email ) : Mail {
-		if( ! $this->validate_email( $email ) ) {
-			throw new Exception ( 'Invalid email-address.', 1 );
+	public function set_from_email( string $email ): void {
+		if ( ! $this->validate_email( $email ) ) {
+			throw new Mail_Exception ( 'Invalid email-address.', 1 );
 		}
 
 		$this->from_email = $email;
-
-		return $this;
 	}
 
 	/**
@@ -141,7 +132,7 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_from_email() : string {
+	public function get_from_email(): string {
 		return $this->from_email;
 	}
 
@@ -154,10 +145,8 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_from_name( string $name ) : Mail {
+	public function set_from_name( string $name ): void {
 		$this->from_name = $name;
-
-		return $this;
 	}
 
 	/**
@@ -167,26 +156,22 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_from_name() : string {
+	public function get_from_name(): string {
 		return $this->from_name;
 	}
 
 	/**
 	 * Add to email addresses.
 	 *
-	 * @param string $email    Email address to add.
-	 * @param int    $position
+	 * @param string $email Email address to add.
+	 * @param int $position
 	 *
-	 * @return Mail Mail object.
-	 *
-	 * @throws Exception
+	 * @throws Mail_Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_to_email( string $email, int $position = -1 ) : Mail {
+	public function add_to_email( string $email, int $position = - 1 ) : void {
 		$this->add_email_to_array( $email, $this->to_emails, $position );
-
-		return $this;
 	}
 
 	/**
@@ -196,26 +181,24 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_to_emails() : array {
+	public function get_to_emails(): array {
 		return $this->to_emails;
 	}
 
 	/**
 	 * Add CC email addresses.
 	 *
-	 * @param string $email    Email address to add.
-	 * @param int    $position Position in array.
+	 * @param string $email Email address to add.
+	 * @param int $position Position in array.
 	 *
 	 * @return Mail Mail object.
 	 *
-	 * @throws Exception
+	 * @throws Mail_Exception
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_cc_email( string $email, int $position = -1 ) : Mail {
+	public function add_cc_email( string $email, int $position = - 1 ) : void {
 		$this->add_email_to_array( $email, $this->cc_emails, $position );
-
-		return $this;
 	}
 
 	/**
@@ -225,26 +208,22 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_cc_emails() : array {
+	public function get_cc_emails(): array {
 		return $this->cc_emails;
 	}
 
 	/**
 	 * Add BCC email addresses.
 	 *
-	 * @param string $email    Email address to add.
-	 * @param int    $position Position in array.
+	 * @param string $email Email address to add.
+	 * @param int $position Position in array.
 	 *
-	 * @return Mail Mail object.
-	 *
-	 * @throws Exception
+	 * @throws Mail_Exception Invalid email address.
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_bcc_email( string $email, int $position = -1 ) : Mail {
+	public function add_bcc_email( string $email, int $position = - 1 ) : void {
 		$this->add_email_to_array( $email, $this->bcc_emails, $position );
-
-		return $this;
 	}
 
 	/**
@@ -254,65 +233,25 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_bcc_emails() : array {
+	public function get_bcc_emails(): array {
 		return $this->bcc_emails;
 	}
 
 	/**
-	 * Add email to array.
+	 * Set mail subject.
 	 *
-	 * @param string $email    Email address to add.
-	 * @param array  $array    Array where adress have to be added.
-	 * @param int    $position Position in array.
-	 *
-	 * @throws Exception Invalid email address.
+	 * @param string $subject Mail subject.
 	 *
 	 * @since 1.0.0
 	 */
-	private function add_email_to_array( string $email, array &$array, int $position = -1 ) : void {
-		if( ! $this->validate_email( $email ) ) {
-			throw new Exception ( 'Invalid email-address.', 1 );
-		}
-
-		$this->add_to_array( $email, $array, $position );
-	}
-
-	/**
-	 * Add value to array.
-	 *
-	 * @param mixed $content  Content to add.
-	 * @param array $array    Array where content have to be added.
-	 * @param int   $position Position in array.
-	 *
-	 * @since 1.0.0
-	 */
-	private function add_to_array( $content, array &$array, int $position = -1 ) {
-		if( -1 === $position ) {
-			$array[] = $content;
-		}
-
-		$array[ $position ] = $content;
-	}
-
-	/**
-	 * Set subject.
-	 *
-	 * @param string $subject
-	 *
-	 * @return Mail Mail object.
-	 *
-	 * @since 1.0.0
-	 */
-	public function set_subject( string $subject ) : Mail {
+	public function set_subject( string $subject ) : void {
 		$this->subject = $subject;
-
-		return $this;
 	}
 
 	/**
-	 * Get subject.
+	 * Get mail subject.
 	 *
-	 * @return string
+	 * @return string Mail subject.
 	 *
 	 * @since 1.0.0
 	 */
@@ -321,50 +260,120 @@ class Mail {
 	}
 
 	/**
-	 * Set content.
+	 * Set mail content.
 	 *
-	 * @param string $content
-	 *
-	 * @return Mail Mail object.
+	 * @param string $content Mail content.
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_content( string $content ) : Mail {
+	public function set_content( string $content ) : void {
 		$this->content = $content;
-
-		return $this;
 	}
 
 	/**
-	 * Get subject.
+	 * Get mail body.
 	 *
 	 * @return string
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_content() : string {
-		return $this->content;
+	public function get_body() : string {
+		$body = "--{$this->mime_boundary}\r\n";
+		$body .= "Content-Type: {$this->get_content_type()}; charset=ISO-8859-1\r\n";
+		$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+		$body .= chunk_split(base64_encode($this->content));
+
+		if ( count( $this->attachments ) > 0 ) {
+			foreach ( $this->attachments as $attachment ) {
+				$file_name = basename( $attachment );
+				$file_size = filesize( $attachment );
+
+				$body   .= "--{$this->mime_boundary}\n";
+				$fp      = fopen( $attachment, 'rb' );
+				$data    = fread( $fp, $file_size );
+
+				fclose( $fp );
+
+				$data = chunk_split( base64_encode( $data ) );
+
+				$body .= "Content-Type: application/octet-stream; name=\"" . $file_name . "\"\n" .
+				            "Content-Description: " . $file_name . "\n" .
+				            "Content-Disposition: attachment;\n" . " filename=\"" . $file_name . "\"; size=" . $file_size . ";\n" .
+				            "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
+			}
+
+			$body .= "--{$this->mime_boundary}--";
+		}
+
+		return $body;
+	}
+
+	/**
+	 * Get header.
+	 *
+	 * @return string
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_header(): string {
+		$from_name   = $this->get_from_name();
+		$from_email  = $this->get_from_email();
+		$to          = $this->get_to_emails();
+		$cc          = $this->get_cc_emails();
+		$bcc         = $this->get_bcc_emails();
+
+		$headers = array();
+
+		if ( ! empty( $this->from_name ) && ! empty( $this->from_email ) ) {
+			$headers[] = "From: {$from_name} <{$from_email}>";
+		}
+
+		if ( count( $to ) > 0 ) {
+			$to        = implode( ', ', $to );
+			$headers[] = "Cc: {$to}";
+		}
+
+		if ( count( $cc ) > 0 ) {
+			$cc        = implode( ', ', $cc );
+			$headers[] = "Cc: {$cc}";
+		}
+
+		if ( count( $bcc ) > 0 ) {
+			$bcc       = implode( ', ', $bcc );
+			$headers[] = "Bcc: {$bcc}";
+		}
+
+		if ( count( $this->attachments ) > 0 ) {
+			$uid = md5( uniqid( time() ) );
+
+			// Headers for attachment
+			$headers[] = 'MIME-Version: 1.0';
+			$headers[] = 'Content-Type: multipart/mixed;';
+			$headers[] = " boundary=\"{$this->mime_boundary}\"";
+		}
+
+		$headers = implode( ' \r\n', $headers );
+
+		return $headers;
 	}
 
 	/**
 	 * Add attachment to email.
 	 *
-	 * @param string $attachment Attachment file (path not url!).
+	 * @param string $attachment Attachment file (path only).
 	 *
 	 * @return Mail Mail object.
 	 *
-	 * @throws Exception Invalid email address.
+	 * @throws Mail_Exception Invalid email address.
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_attachment ( string $attachment ) : Mail {
-		if( ! $this->validate_attachment( $attachment ) ) {
-			throw new Exception ( 'Invalid attachment file.', 1 );
+	public function add_attachment( string $attachment ): void {
+		if ( ! $this->validate_attachment( $attachment ) ) {
+			throw new Mail_Exception ( 'Invalid attachment file.', 1 );
 		}
 
-		$this->add_to_array( $attachment, $this->attachements );
-
-		return $this;
+		$this->add_to_array( $attachment, $this->attachments );
 	}
 
 	/**
@@ -374,25 +383,38 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_attachments() : array {
-		return $this->attachements;
+	public function get_attachments(): array {
+		return $this->attachments;
 	}
 
 	/**
-	 * Send Mail.
+	 * Set content type.
 	 *
-	 * @return Mail Mail object.
+	 * @param string $content_type
 	 *
 	 * @since 1.0.0
 	 */
-	public function send() : Mail {
-		$this->mail_driver->set_mail( $this );
+	public function set_content_type( string $content_type ) : void {
+		$this->content_type = $content_type;
+	}
 
-		if( ! $this->mail_driver->send() ) {
-			throw new Exception( 'Email delivery failed', 02 );
+	/**
+	 * Get content type.
+	 *
+	 * @return string Content type.
+	 *
+	 * @since 1.0.0
+	 */
+	public function get_content_type() : string {
+		if ( ! empty( $this->content_type ) ) {
+			return $this->content_type;
 		}
 
-		return $this;
+		if ( $this->content !== strip_tags( $this->content  ) ) {
+			return $this->content_type = 'text/html';
+		} else {
+			return $this->content_type = 'text/plain';
+		}
 	}
 
 	/**
@@ -404,8 +426,8 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	private function validate_email( string $email ) : bool {
-		if( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+	private function validate_email( string $email ): bool {
+		if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
 			return false;
 		}
 
@@ -421,11 +443,48 @@ class Mail {
 	 *
 	 * @since 1.0.0
 	 */
-	private function validate_attachment( string $attachment ) : bool {
-		if( ! file_exists( $attachment ) ) {
+	private function validate_attachment( string $attachment ): bool {
+		if ( ! file_exists( $attachment ) ) {
 			return false;
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Add email to array.
+	 *
+	 * @param string $email Email address to add.
+	 * @param array $array Array where adress have to be added.
+	 * @param int $position Position in array.
+	 *
+	 * @throws Mail_Exception Invalid email address.
+	 *
+	 * @since 1.0.0
+	 */
+	private function add_email_to_array( string $email, array &$array, int $position = - 1 ): void {
+		if ( ! $this->validate_email( $email ) ) {
+			throw new Mail_Exception ( 'Invalid email-address.', 1 );
+		}
+
+		$this->add_to_array( $email, $array, $position );
+	}
+
+	/**
+	 * Add value to array.
+	 *
+	 * @param mixed $content Content to add.
+	 * @param array $array Array where content have to be added.
+	 * @param int $position Position in array.
+	 *
+	 * @since 1.0.0
+	 */
+	private function add_to_array( $content, array &$array, int $position = - 1 ) {
+		if ( - 1 === $position ) {
+			$array[] = $content;
+		}
+
+		$array[ $position ] = $content;
 	}
 }

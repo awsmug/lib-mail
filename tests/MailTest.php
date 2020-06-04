@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 use awsm\Mail_Wrapper\Mail;
 use awsm\Mail_Wrapper\Driver\Driver_PHP AS Mail_Driver_PHP;
-use awsm\Mail_Wrapper\Exception;
+use awsm\Mail_Wrapper\Mail_Exception;
 
 final class MailTest extends TestCase {
 	private $driver;
@@ -38,7 +38,7 @@ final class MailTest extends TestCase {
 		$this->mail->set_from_email( 'john.doe@dummy.com' );
 		$this->assertEquals('john.doe@dummy.com', $this->mail->get_from_email() );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->set_from_email( 'abcdefg' );
 	}
 
@@ -57,7 +57,7 @@ final class MailTest extends TestCase {
 		$emails = $this->mail->get_to_emails();
 		$this->assertEquals('john.doe4@dummy.com', $emails[0] );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->add_to_email( 'abcdefg' );
 	}
 
@@ -76,7 +76,7 @@ final class MailTest extends TestCase {
 		$emails = $this->mail->get_cc_emails();
 		$this->assertEquals('john.doe8@dummy.com', $emails[0] );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->add_cc_email( 'abcdefg' );
 	}
 
@@ -95,7 +95,7 @@ final class MailTest extends TestCase {
 		$emails = $this->mail->get_bcc_emails();
 		$this->assertEquals('john.doe12@dummy.com', $emails[0] );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->add_bcc_email( 'abcdefg' );
 	}
 
@@ -133,7 +133,7 @@ final class MailTest extends TestCase {
 		$this->assertIsArray( $attachments );
 		$this->assertEquals( $file_1, $attachments[0] );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->add_attachment( dirname(__FILE__ ) . '/abcdefg.txt' );
 	}
 
@@ -144,7 +144,7 @@ final class MailTest extends TestCase {
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
-		$this->expectException( Exception::class );
+		$this->expectException( Mail_Exception::class );
 		$this->mail->send();
 	}
 }

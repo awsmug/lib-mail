@@ -9,6 +9,5 @@ namespace awsm\Mail_Wrapper;
  *
  * @since 1.0.0
  */
-class Exception extends \Exception {
-
+class Mail_Exception extends \Exception {
 }
