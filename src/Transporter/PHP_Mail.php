@@ -1,20 +1,20 @@
 <?php
 
-namespace AWSM\Lib_Mail\Dispatcher;
+namespace AWSM\Lib_Mail\Transporter;
 
-use AWSM\Lib_Mail\Model\Mail_Dispatcher_Trait;
-use AWSM\Lib_Mail\Model\Mail_Dispatcher_Interface;
+use AWSM\Lib_Mail\Model\Mail_Transporter_Trait;
+use AWSM\Lib_Mail\Model\Mail_Transporter_Interface;
 use AWSM\Lib_Mail\Mail_Exception;
 
 /**
  * Class PHP_Mail.
  *
- * @package AWSM\Lib_Mail\Dispatcher
+ * @package AWSM\Lib_Mail\Transporter
  *
  * @since 1.0.0
  */
-class PHP_Mail implements Mail_Dispatcher_Interface {
-	use Mail_Dispatcher_Trait;
+class PHP_Mail implements Mail_Transporter_Interface {
+	use Mail_Transporter_Trait;
 
 	/**
 	 * Send Mail.

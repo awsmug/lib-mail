@@ -2,7 +2,7 @@
 
 namespace AWSM\Lib_Mail\Model;
 
-trait Mail_Dispatcher_Trait {
+trait Mail_Transporter_Trait {
 	/**
 	 * Mail address.
 	 *

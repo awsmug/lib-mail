@@ -3,17 +3,17 @@
 use PHPUnit\Framework\TestCase;
 
 use AWSM\Lib_Mail\Mail;
-use AWSM\Lib_Mail\Dispatcher\PHP_Mail;
+use AWSM\Lib_Mail\Transporter\PHP_Mail;
 use AWSM\Lib_Mail\Mail_Exception;
 
 final class MailTest extends TestCase {
-	private $dispatcher;
+	private $transporter;
 
 	private $mail;
 
 	protected function setUp(): void
 	{
-		$this->dispatcher = new PHP_Mail();
+		$this->transporter = new PHP_Mail();
 		$this->mail = new Mail();
 	}
 
@@ -136,8 +136,8 @@ final class MailTest extends TestCase {
 		$this->mail->set_subject('The email subject' );
 		$this->mail->set_content( 'This is my message' );
 
-		$this->dispatcher->set_mail( $this->mail );
+		$this->transporter->set_mail( $this->mail );
 
-		$this->assertFalse( $this->dispatcher->send() );
+		$this->assertFalse( $this->transporter->send() );
 	}
 }

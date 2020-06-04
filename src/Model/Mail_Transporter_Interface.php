@@ -3,13 +3,13 @@
 namespace AWSM\Lib_Mail\Model;
 
 /**
- * Interface Mail_Dispatcher_Interface
+ * Interface Mail_Transporter_Interface
  *
  * @package AWSM\Lib_Mail
  *
  * @since 1.0.0
  */
-interface Mail_Dispatcher_Interface {
+interface Mail_Transporter_Interface {
 	/**
 	 * Set Mail.
 	 *

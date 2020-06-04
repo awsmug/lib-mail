@@ -2,8 +2,8 @@
 
 namespace AWSM\Lib_Mail\Driver;
 
-use AWSM\Lib_Mail\Model\Mail_Dispatcher_Trait;
-use AWSM\Lib_Mail\Model\Mail_Dispatcher_Interface;
+use AWSM\Lib_Mail\Model\Mail_Transporter_Trait;
+use AWSM\Lib_Mail\Model\Mail_Transporter_Interface;
 use AWSM\Lib_Mail\Mail_Exception;
 
 /**
@@ -13,8 +13,8 @@ use AWSM\Lib_Mail\Mail_Exception;
  *
  * @since 1.0.0
  */
-class WordPress implements Mail_Dispatcher_Interface {
-	use Mail_Dispatcher_Trait;
+class WordPress implements Mail_Transporter_Interface {
+	use Mail_Transporter_Trait;
 
 	/**
 	 * Send mail.
