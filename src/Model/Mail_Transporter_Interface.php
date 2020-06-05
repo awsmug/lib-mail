@@ -26,7 +26,7 @@ interface Mail_Transporter_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function send() : bool;
+	public function send() : void;
 
 	/**
 	 * Get errors on sending email.
