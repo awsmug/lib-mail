@@ -286,17 +286,19 @@ class Mail implements Mail_Interface {
 	/**
 	 * Get mail body.
 	 *
-	 * @return string
+	 * @param bool $add_attachments True if attachments have to be added, false if not.
+	 *
+	 * @return string Email body.
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_body(): string {
+	public function get_body( bool $add_attachments = true ): string {
 		$body = "--{$this->mime_boundary}\r\n";
 		$body .= "Content-Type: {$this->get_content_type()}; charset=ISO-8859-1\r\n";
 		$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
 		$body .= chunk_split( base64_encode( $this->content ) );
 
-		if ( count( $this->attachments ) > 0 ) {
+		if ( count( $this->attachments ) > 0 && $add_attachments ) {
 			foreach ( $this->attachments as $attachment ) {
 				$file_name = basename( $attachment );
 				$file_size = filesize( $attachment );
@@ -324,11 +326,13 @@ class Mail implements Mail_Interface {
 	/**
 	 * Get header.
 	 *
-	 * @return string
+	 * @param bool $add_attachments True if attachments have to be added, false if not.
+	 *
+	 * @return string Email Header.
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_header(): string {
+	public function get_header( bool $add_attachments = true ): string {
 		$headers = array();
 
 		if ( ! empty( $this->from_name ) && ! empty( $this->from_email ) ) {
@@ -352,7 +356,7 @@ class Mail implements Mail_Interface {
 			$headers[] = "Bcc: {$this->bcc_emails}";
 		}
 
-		if ( count( $this->attachments ) > 0 ) {
+		if ( count( $this->attachments ) > 0 && $add_attachments ) {
 			$uid = md5( uniqid( time() ) );
 
 			// Headers for attachment
