@@ -130,14 +130,17 @@ final class MailTest extends TestCase {
 	}
 
 	public function testSendEmail(): void {
-		$this->mail->set_from_name( 'John Doe' );
-		$this->mail->set_from_email( 'john.doe@dummy.com' );
-		$this->mail->add_to_email('trash@awesome.ug' );
-		$this->mail->set_subject('The email subject' );
-		$this->mail->set_content( 'This is my message' );
+		$transporter = new PHP_Mail();
+		$mail = new Mail();
+
+		$mail->set_from_email( 'john.doe@dummy.com' );
+		$mail->add_to_email('trash@awesome.ug' );
+		$mail->set_subject('The email subject' );
+		$mail->set_content( 'This is my message' );
 
 		$this->transporter->set_mail( $this->mail );
 
-		$this->assertFalse( $this->transporter->send() );
+		$this->expectException( Mail_Exception::class );
+		$this->transporter->send();
 	}
 }
