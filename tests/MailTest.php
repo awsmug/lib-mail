@@ -145,6 +145,7 @@ final class MailTest extends TestCase {
 	}
 
 	public function testSendEmail(): void {
+		// @todo: How to test?
 		$mail = new Mail();
 
 		$mail->set_from_email( 'john.doe@dummy.com' );
