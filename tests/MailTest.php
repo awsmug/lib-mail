@@ -138,9 +138,9 @@ final class MailTest extends TestCase {
 		$mail->set_subject('The email subject' );
 		$mail->set_content( 'This is my message' );
 
-		$this->transporter->set_mail( $this->mail );
+		$transporter->set_mail( $this->mail );
 
 		$this->expectException( Mail_Exception::class );
-		$this->transporter->send();
+		$transporter->send();
 	}
 }
