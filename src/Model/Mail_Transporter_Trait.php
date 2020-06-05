@@ -31,15 +31,4 @@ trait Mail_Transporter_Trait {
 	public function set_mail( Mail_Interface $mail ) : void {
 		$this->mail = $mail;
 	}
-
-	/**
-	 * Get errors.
-	 *
-	 * @return array
-	 *
-	 * @since 1.0.0
-	 */
-	public function get_errors(): array {
-		return $this->errors;
-	}
 }
