@@ -1,6 +1,6 @@
 {
     "name": "awsm/lib-mail",
-    "description": "Awesome Mail functionality.",
+    "description": "Awesome mail functionality. Easy and clean mail creation and transportation.",
     "version": "1.0.0-beta-1",
     "license": "GPL-2.0-or-later",
     "autoload": {
