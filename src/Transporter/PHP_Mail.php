@@ -19,21 +19,15 @@ class PHP_Mail implements Mail_Transporter_Interface {
 	/**
 	 * Send Mail.
 	 *
-	 * @return bool True if sent, false if not.
-	 *
-	 * @throws Mail_Exception Error on sending mail.
+	 * @throws Mail_Exception Error on sending mail with PHP mail function.
 	 *
 	 * @since 1.0.0
 	 */
-	public function send() : bool {
+	public function send(): void {
 		$to_emails = implode( ',', $this->mail->get_to_emails() );
 
-		if( mail( $to_emails, $this->mail->get_subject(), $this->mail->get_body(), $this->mail->get_header() ) ) {
-			return true;
+		if ( ! mail( $to_emails, $this->mail->get_subject(), $this->mail->get_body(), $this->mail->get_header() ) ) {
+			throw new Mail_Exception( 'Could not send email with PHP mail function.' );
 		}
-
-		$this->errors[] = 'Could not send email with PHP mail function.';
-
-		return false;
 	}
 }
