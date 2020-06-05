@@ -19,16 +19,18 @@ interface Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_header( bool $add_attachment ) : string;
+	public function get_header( bool $add_attachments ) : string;
 
 	/**
 	 * Get mail body.
+	 *
+	 * @param bool $add_attachments True if attachments have to be added, false if not.
 	 *
 	 * @return string Body.
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_body( bool $add_attachment ) : string;
+	public function get_body( bool $add_attachments ) : string;
 
 	/**
 	 * Get to email addresses.
