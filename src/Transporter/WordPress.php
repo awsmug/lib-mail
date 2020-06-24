@@ -1,6 +1,6 @@
 <?php
 
-namespace AWSM\Lib_Mail\Driver;
+namespace AWSM\Lib_Mail\Transporter;
 
 use AWSM\Lib_Mail\Model\Mail_Transporter_Trait;
 use AWSM\Lib_Mail\Model\Mail_Transporter_Interface;
