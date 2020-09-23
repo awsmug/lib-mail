@@ -1,35 +1,35 @@
 <?php
 
-namespace AWSM\Lib_Mail\Transporter;
+namespace AWSM\LibMail\Transporter;
 
-use AWSM\Lib_Mail\Model\Mail_Transporter_Trait;
-use AWSM\Lib_Mail\Model\Mail_Transporter_Interface;
-use AWSM\Lib_Mail\Mail_Exception;
+use AWSM\LibMail\Model\MailTransporterTrait;
+use AWSM\LibMail\Model\MailTransporterInterface;
+use AWSM\LibMail\MailException;
 
 /**
  * Class WordPress.
  *
- * @package AWSM\Lib_Mail\Driver
+ * @package AWSM\LibMail\Driver
  *
  * @since 1.0.0
  */
-class WordPress implements Mail_Transporter_Interface {
-	use Mail_Transporter_Trait;
+class WordPress implements MailTransporterInterface {
+	use MailTransporterTrait;
 
 	/**
 	 * Send mail.
 	 *
-	 * @throws Mail_Exception Error on sending mail with wp_mail function.
+	 * @throws MailException Error on sending mail with wp_mail function.
 	 *
 	 * @since 1.0.0
 	 */
 	public function send(): void {
 		if ( ! function_exists( 'wp_mail' ) ) {
-			throw new Mail_Exception( 'wp_mail function does not exists. Make sure you working on a WordPress installation.' );
+			throw new MailException( 'wp_mail function does not exists. Make sure you working on a WordPress installation.' );
 		}
 
-		if ( ! wp_mail( $this->mail->get_to_emails(), $this->mail->get_subject(), $this->mail->get_content(), $this->mail->get_header( false ), $this->mail->get_attachments() ) ) {
-			throw new Mail_Exception( 'Could not send email with wp_mail function.' );
+		if ( ! wp_mail( $this->mail->toEmails(), $this->mail->subject(), $this->mail->content(), $this->mail->header( false ), $this->mail->attachments() ) ) {
+			throw new MailException( 'Could not send email with wp_mail function.' );
 		}
 	}
 }

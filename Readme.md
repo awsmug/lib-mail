@@ -13,24 +13,24 @@ This little library allows you to create email objects easy sent by a selected t
 ```php
 <?php
 
-use AWSM\Lib_Mail\Transporter\PHP_Mail;
-use AWSM\Lib_Mail\Mail;
-use AWSM\Lib_Mail\Mail_Exception;
+use AWSM\LibMail\Transporter\PhpMail;
+use AWSM\LibMail\Mail;
+use AWSM\LibMail\MailException;
 
 
 $mail = new Mail();
-$transporter = new PHP_Mail();
+$transporter = new PhpMail();
 
 try {
-    $mail->add_to_email( 'john.doe@dummy.com' );
-    $mail->set_from_name( 'Developer' );
-    $mail->set_from_email( 'developer@dummy.com' );
-    $mail->set_subject( 'Read my mail!' );
-    $mail->set_content( 'Hello John! Greetings from the developer!' );
+    $mail->addToEmail( 'john.doe@dummy.com' );
+    $mail->setFromName( 'Developer' );
+    $mail->setFromEmail( 'developer@dummy.com' );
+    $mail->setSubject( 'Read my mail!' );
+    $mail->setContent( 'Hello John! Greetings from the developer!' );
 
-    $transporter->set_mail( $mail );
+    $transporter->setMail( $mail );
     $transporter->send();
-} catch ( Mail_Exception $e ) {
+} catch ( MailException $e ) {
     echo $e->getMessage();
 }
 ```

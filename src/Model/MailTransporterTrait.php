@@ -1,12 +1,12 @@
 <?php
 
-namespace AWSM\Lib_Mail\Model;
+namespace AWSM\LibMail\Model;
 
-trait Mail_Transporter_Trait {
+trait MailTransporterTrait {
 	/**
 	 * Mail address.
 	 *
-	 * @var Mail_Interface
+	 * @var MailInterface
 	 *
 	 * @since 1.0.0
 	 */
@@ -24,11 +24,11 @@ trait Mail_Transporter_Trait {
 	/**
 	 * Set mail object.
 	 *
-	 * @param Mail_Interface $mail Mail object.
+	 * @param MailInterface $mail Mail object.
 	 *
 	 * @since 1.0.0
 	 */
-	public function set_mail( Mail_Interface $mail ) : void {
+	public function setMail( MailInterface $mail ) : void {
 		$this->mail = $mail;
 	}
 }

@@ -1,36 +1,36 @@
 <?php
 
-namespace AWSM\Lib_Mail\Model;
+namespace AWSM\LibMail\Model;
 
 /**
- * Interface Mail_Interface
+ * Interface MailInterface
  *
- * @package AWSM\Lib_Mail
+ * @package AWSM\LibMail
  *
  * @since 1.0.0
  */
-interface Mail_Interface {
+interface MailInterface {
 	/**
 	 * Get mail header.
 	 *
-	 * @param bool $add_attachments True if attachments have to be added, false if not.
+	 * @param bool $addAttachments True if attachments have to be added, false if not.
 	 *
 	 * @return string Mailheader.
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_header( bool $add_attachments ) : string;
+	public function header( bool $addAttachments = false ) : string;
 
 	/**
 	 * Get mail body.
 	 *
-	 * @param bool $add_attachments True if attachments have to be added, false if not.
+	 * @param bool $addAttachments True if attachments have to be added, false if not.
 	 *
 	 * @return string Body.
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_body( bool $add_attachments ) : string;
+	public function body( bool $addAttachments = false ) : string;
 
 	/**
 	 * Get to email addresses.
@@ -39,7 +39,7 @@ interface Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_to_emails() : array;
+	public function toEmails() : array;
 
 	/**
 	 * Get mail subject.
@@ -48,7 +48,7 @@ interface Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_subject() : string;
+	public function subject() : string;
 
 	/**
 	 * Get mail content.
@@ -57,7 +57,7 @@ interface Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_content() : string;
+	public function content() : string;
 
 	/**
 	 * Get mail attachments.
@@ -66,5 +66,5 @@ interface Mail_Interface {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_attachments() : array;
+	public function attachments() : array;
 }
